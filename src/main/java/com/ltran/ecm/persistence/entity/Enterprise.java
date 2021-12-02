@@ -2,12 +2,13 @@ package com.ltran.ecm.persistence.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import lombok.Data;
+import lombok.Getter;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
-@Data
+@Getter
 @Entity(name = "enterprise")
 @Table(name = "ENTERPRISE")
 @JsonIdentityInfo(
@@ -26,13 +27,26 @@ public class Enterprise {
     private String tvaNumber;
 
     @ManyToMany(targetEntity = Contact.class, mappedBy = "enterprises")
-    private List<Contact> contacts;
+    private Set<Contact> contacts;
 
     public void addContact(Contact contact) {
-        if (!contacts.contains(contact)) {
-            contacts.add(contact);
-            contact.getEnterprises().add(this);
-        }
+        contacts.add(contact);
+        contact.getEnterprises().add(this);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Enterprise enterprise = (Enterprise) o;
+        return id == enterprise.id
+                && Objects.equals(address, enterprise.address)
+                && Objects.equals(tvaNumber, enterprise.tvaNumber);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, address, tvaNumber);
     }
 
 }
