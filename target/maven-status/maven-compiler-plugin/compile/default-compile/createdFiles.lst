@@ -1,0 +1,12 @@
+com\ltran\ecm\persistence\repository\ContactRepository.class
+com\ltran\ecm\exception\ContactNotFoundException.class
+com\ltran\ecm\rest\ContactController.class
+com\ltran\ecm\rest\RestExceptionHandler.class
+com\ltran\ecm\exception\EnterpriseNotFoundException.class
+com\ltran\ecm\Launcher.class
+com\ltran\ecm\exception\InvalidInputException.class
+com\ltran\ecm\rest\EnterpriseController.class
+com\ltran\ecm\SecurityConfig.class
+com\ltran\ecm\persistence\repository\EnterpriseRepository.class
+com\ltran\ecm\persistence\entity\Enterprise.class
+com\ltran\ecm\persistence\entity\Contact.class
