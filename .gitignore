@@ -1,0 +1,16 @@
+# Custom
+logs
+*.log
+generated
+
+# Maven
+target
+
+# IntelliJ
+.idea
+*.iws
+*.iml
+*.ipr
+
+# Eclipse
+.project
