@@ -18,7 +18,7 @@ public class Enterprise {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column(name = "ADDRESS", nullable = false)
     private String address;
@@ -39,7 +39,7 @@ public class Enterprise {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Enterprise enterprise = (Enterprise) o;
-        return id == enterprise.id
+        return Objects.equals(id, enterprise.id)
                 && Objects.equals(address, enterprise.address)
                 && Objects.equals(tvaNumber, enterprise.tvaNumber);
     }

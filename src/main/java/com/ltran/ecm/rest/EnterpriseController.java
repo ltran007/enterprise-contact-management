@@ -31,8 +31,8 @@ public class EnterpriseController {
     }
 
     @PutMapping("/{id}")
-    public Enterprise update(@RequestBody Enterprise enterprise, @PathVariable long id) {
-        if (enterprise.getId() != id) {
+    public Enterprise update(@RequestBody Enterprise enterprise, @PathVariable Long id) {
+        if (id == null | !id.equals(enterprise.getId())) {
             throw new InvalidInputException("Enterprise Id is not valid");
         }
         enterpriseRepository.findById(id)
@@ -55,7 +55,10 @@ public class EnterpriseController {
     }
 
     @PutMapping("/{contactId}/{enterpriseId}")
-    public Enterprise addContactToEnterprise(@PathVariable long contactId, @PathVariable long enterpriseId) {
+    public Enterprise addContactToEnterprise(@PathVariable Long contactId, @PathVariable Long enterpriseId) {
+        if (contactId == null || enterpriseId == null) {
+            throw new InvalidInputException("Contact Id and/or Enterprise Id cannot be null");
+        }
         Contact contact = contactRepository.findById(contactId)
                 .orElseThrow(ContactNotFoundException::new);
         Enterprise enterprise = enterpriseRepository.findById(enterpriseId)

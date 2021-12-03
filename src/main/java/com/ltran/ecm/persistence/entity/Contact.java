@@ -18,7 +18,7 @@ public class Contact {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column(name = "FIRST_NAME", nullable = false)
     private String firstName;
@@ -40,7 +40,7 @@ public class Contact {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Contact contact = (Contact) o;
-        return id == contact.id
+        return Objects.equals(id, contact.id)
                 && Objects.equals(firstName, contact.firstName)
                 && Objects.equals(lastName, contact.lastName)
                 && Objects.equals(address, contact.address)

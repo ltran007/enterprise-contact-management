@@ -24,8 +24,8 @@ public class ContactController {
     }
 
     @PutMapping("/{id}")
-    public Contact update(@RequestBody Contact contact, @PathVariable long id) {
-        if (contact.getId() != id) {
+    public Contact update(@RequestBody Contact contact, @PathVariable Long id) {
+        if (id == null || !id.equals(contact.getId())) {
             throw new InvalidInputException("Contact Id is not valid");
         }
         contactRepository.findById(id)
@@ -34,7 +34,10 @@ public class ContactController {
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable long id) {
+    public void delete(@PathVariable Long id) {
+        if (id == null) {
+            throw new InvalidInputException("Contact Id cannot be null");
+        }
         contactRepository.findById(id)
                 .orElseThrow(ContactNotFoundException::new);
         contactRepository.deleteById(id);
